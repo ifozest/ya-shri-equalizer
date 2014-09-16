@@ -13,7 +13,6 @@ $(function() {
 
     // Кол-во столбиков
     var colQuantity = Math.ceil($selector.width() / colWidth);
-    //var cols = new Array(colQuantity);
     for (var i = 0; i < colQuantity; i++) {
       $('<span/>').appendTo($selector).addClass('equalizer-span').width(colWidth);
     }
@@ -39,9 +38,9 @@ $(function() {
   };
 
 
-  setEqualizer('#eq_1 .equalizer', 2000, 2);
-  setEqualizer('#eq_2 .equalizer', 2000, 2);
-  setEqualizer('#eq_3 .equalizer', 2000, 2);
+  setEqualizer('#eq_1 .equalizer', 1000, 2);
+  setEqualizer('#eq_2 .equalizer', 1000, 2);
+  setEqualizer('#eq_3 .equalizer', 1000, 2);
 
 });
 
