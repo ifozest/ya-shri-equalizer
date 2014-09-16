@@ -1,28 +1,9 @@
 $(function() {
 
-  var setEqualizer = function(selector, timeout, colWidth) {
-    var $selector = $(selector);
-    if (!colWidth) {
-      colWidth = 1;
-    }
-
-    $selector.css({
-      verticalAlign: 'bottom',
-      lineHeight: $selector.height() + 'px'
-    });
-
-    // Кол-во столбиков
-    var colQuantity = Math.ceil($selector.width() / colWidth);
-    for (var i = 0; i < colQuantity; i++) {
-      $('<span/>').appendTo($selector).addClass('equalizer-span').width(colWidth);
-    }
-    runEqualizer($selector, timeout);
-  };
-
   var processColumn = function($element, timeout, height) {
     var colHeight = Math.round(height * Math.random());
-    $element.height(colHeight).animate(
-      {height: height / 2},
+    $element.animate(
+      {height: colHeight},
       timeout,
       'linear',
       function() {
@@ -35,6 +16,25 @@ $(function() {
     $selector.find('span').each(function(i, element) {
       processColumn($(element), timeout, height);
     });
+  };
+
+  var setEqualizer = function(selector, timeout, colWidth) {
+    var $selector = $(selector), colQuantity;
+    if (!colWidth) {
+      colWidth = 1;
+    }
+
+    $selector.css({
+      verticalAlign: 'bottom',
+      lineHeight: $selector.height() + 'px'
+    });
+
+    // Кол-во столбиков
+    colQuantity = Math.ceil($selector.width() / colWidth);
+    for (var i = 0; i < colQuantity; i++) {
+      $('<span/>').appendTo($selector).addClass('equalizer-span').width(colWidth);
+    }
+    runEqualizer($selector, timeout);
   };
 
 
