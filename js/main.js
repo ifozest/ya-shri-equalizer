@@ -5,7 +5,7 @@ $(function () {
       , newColHeights = [];
     $columns.each(function (i) {
       previousColHeights[i] = ($(this).height());
-      newColHeights[i] = (Math.round(height * Math.random()));
+      newColHeights[i] = Math.round(height * Math.random());
     });
     $({timer: 0}).animate({timer: 1}, {
       duration: timeout,
@@ -26,7 +26,7 @@ $(function () {
     var $selector = $(selector)
       , height = $selector.height()
       , colQuantity
-      , $columns;
+      , $columns = $();
 
     if (!colWidth) {
       colWidth = 1;
@@ -41,9 +41,12 @@ $(function () {
     colQuantity = Math.ceil($selector.width() / colWidth);
 
     for (var i = 0; i < colQuantity; i++) {
-      $('<span/>').appendTo($selector).addClass('equalizer-span').width(colWidth);
-    }
-    $columns = $selector.find('span');
+      $columns = $columns.add('<span/>', {
+        class: 'equalizer-span',
+        width: colWidth
+      });
+     }
+    $selector.append($columns);
     runEqualizer($columns, timeout, height);
   };
 
