@@ -1,11 +1,9 @@
 $(function () {
 
-  var runEqualizer = function ($selector, timeout) {
-    var height = $selector.height()
-      , previousColHeights = []
-      , newColHeights = []
-      , $spans = $selector.find('span');
-    $spans.each(function (i) {
+  var runEqualizer = function ($columns, timeout, height) {
+    var previousColHeights = []
+      , newColHeights = [];
+    $columns.each(function (i) {
       previousColHeights[i] = ($(this).height());
       newColHeights[i] = (Math.round(height * Math.random()));
     });
@@ -13,19 +11,22 @@ $(function () {
       duration: timeout,
       easing: 'linear',
       step: function (now) {
-        $spans.each(function (i) {
+        $columns.each(function (i) {
           var colHeight = previousColHeights[i] + (newColHeights[i] - previousColHeights[i]) * now;
           $(this).height(colHeight);
         });
       },
       complete: function () {
-        runEqualizer($selector, timeout);
+        runEqualizer($columns, timeout, height);
       }
     });
   };
 
   var setEqualizer = function (selector, timeout, colWidth) {
-    var $selector = $(selector), colQuantity;
+    var $selector = $(selector)
+      , height = $selector.height()
+      , colQuantity
+      , $columns;
 
     if (!colWidth) {
       colWidth = 1;
@@ -33,7 +34,7 @@ $(function () {
 
     $selector.css({
       verticalAlign: 'bottom',
-      lineHeight: $selector.height() + 'px'
+      lineHeight: height + 'px'
     });
 
     // Кол-во столбиков
@@ -42,7 +43,8 @@ $(function () {
     for (var i = 0; i < colQuantity; i++) {
       $('<span/>').appendTo($selector).addClass('equalizer-span').width(colWidth);
     }
-    runEqualizer($selector, timeout);
+    $columns = $selector.find('span');
+    runEqualizer($columns, timeout, height);
   };
 
   setEqualizer('#eq_1 .equalizer', 1000, 2);
