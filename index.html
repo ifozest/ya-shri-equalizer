@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Equalizr</title>
+        <title>Equalizer</title>
         <link href="css/styles.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -19,6 +19,13 @@
             <div class="equalizer big"></div>
         </div>
         <script src="js/jquery.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/jquery-equalizer.js"></script>
+        <script>
+            $(function(){
+                $('#eq_1').find('.equalizer').setEqualizer(1000, 2);
+                $('#eq_2').find('.equalizer').setEqualizer(1000, 2);
+                $('#eq_3').find('.equalizer').setEqualizer(1000, 2);
+            });
+        </script>
     </body>
 </html>
