@@ -1,2 +1,3 @@
-ya-shri-equalizer
-=================
+#Hello!
+
+You can find sources into src folder
